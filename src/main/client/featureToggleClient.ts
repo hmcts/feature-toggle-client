@@ -13,29 +13,29 @@ export class FeatureToggleClient {
     this.request = request
   }
 
-  isAdmissionsAllowed (user: string, permissions: string): Promise<boolean> {
+  isAdmissionsAllowed (user: string, permissions: string): RequestPromise<boolean> {
     return this.isFeatureEnabled ('cmc_admissions', user, permissions)
   }
 
-  isCitizenFrontendMaintenanceUnplannedEnabled (): Promise<boolean> {
+  isCitizenFrontendMaintenanceUnplannedEnabled (): RequestPromise<boolean> {
     return this.isFeatureEnabled ('cmc_citizen_frontend_maintenance_unplanned')
   }
 
-  isCitizenFrontendMaintenancePlannedEnabled (): Promise<boolean> {
+  isCitizenFrontendMaintenancePlannedEnabled (): RequestPromise<boolean> {
     return this.isFeatureEnabled ('cmc_citizen_frontend_maintenance_planned')
   }
 
-  isLegalFrontendMaintenanceUnplannedEnabled (): Promise<boolean> {
+  isLegalFrontendMaintenanceUnplannedEnabled (): RequestPromise<boolean> {
     return this.isFeatureEnabled ('cmc_legal_frontend_maintenance_unplanned')
   }
 
-  isLegalFrontendMaintenancePlannedEnabled (): Promise<boolean> {
+  isLegalFrontendMaintenancePlannedEnabled (): RequestPromise<boolean> {
     return this.isFeatureEnabled ('cmc_legal_frontend_maintenance_planned')
   }
 
-  private isFeatureEnabled (featureName: String, user?: string, permissions?: string): Promise<boolean> {
+  private isFeatureEnabled (featureName: String, user?: string, permissions?: string): RequestPromise<boolean> {
 
-    const url: string = `${this.endpointURI}/${featureName}`
+    const url: string = `${this.endpointURI}/api/ff4j/check/${featureName}`
 
     return this.request.get(
       url, 

@@ -8,9 +8,9 @@ export class FeatureToggleService {
   private featureToggleUri: string
   private request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>
 
-  constructor (featureToggleUri: string,
+  constructor (featureToggleApiUri: string,
                request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>) {
-    this.featureToggleUri = featureToggleUri
+    this.featureToggleUri = featureToggleApiUri
     this.request = request
   }
 
