@@ -26,13 +26,13 @@ describe('FeatureToggleService', () => {
     mock.cleanAll()
   })
 
-  describe('isAdmissionsAllowed', () => {
+  describe('with user/permissions', () => {
 
     describe('when handling error responses', () => {
       it('should reject promise with HTTP error', async () => {
         FeatureToggleApiMock.rejectFeatureEnabledCheck()
         try {
-          await featureToggleService.isAdmissionsAllowed('user', 'permission')
+          await featureToggleService.isFeatureEnabled('feature-name', 'user', 'permission')
         } catch (err) {
           expect(err.name).to.equal('StatusCodeError')
           expect(err.statusCode).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -44,7 +44,7 @@ describe('FeatureToggleService', () => {
       describe('and the feature toggle is enabled', () => {
         it('should resolve promise returning true', async () => {
           FeatureToggleApiMock.resolveFeatureEnabledCheck('true', 'user', 'permission')
-          const featureToggleEnabled: boolean = await featureToggleService.isAdmissionsAllowed('user', 'permission')
+          const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name', 'user', 'permission')
           expect(featureToggleEnabled).to.be.true
         })
       })
@@ -52,50 +52,40 @@ describe('FeatureToggleService', () => {
       describe('and the feature toggle is disabled', () => {
         it('should resolve promise returning false', async () => {
           FeatureToggleApiMock.resolveFeatureEnabledCheck('false', 'user', 'permission')
-          const featureToggleEnabled: boolean = await featureToggleService.isAdmissionsAllowed('user', 'permission')
+          const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name', 'user', 'permission')
           expect(featureToggleEnabled).to.be.false
         })
       })
     })
   })
 
-  const tests = [
-    { name: 'isCitizenFrontendMaintenanceUnplannedEnabled', method: featureToggleService.isCitizenFrontendMaintenanceUnplannedEnabled },
-    { name: 'isCitizenFrontendMaintenancePlannedEnabled', method: featureToggleService.isCitizenFrontendMaintenancePlannedEnabled },
-    { name: 'isLegalFrontendMaintenanceUnplannedEnabled', method: featureToggleService.isLegalFrontendMaintenanceUnplannedEnabled },
-    { name: 'isLegalFrontendMaintenancePlannedEnabled', method: featureToggleService.isLegalFrontendMaintenancePlannedEnabled }
-  ]
+  describe('without user/permissions', () => {
+    describe('when handling error responses', () => {
+      it('should reject promise with HTTP error', async () => {
+        FeatureToggleApiMock.rejectFeatureEnabledCheck()
+        try {
+          await featureToggleService.isFeatureEnabled('feature-name')
+        } catch (err) {
+          expect(err.name).to.equal('StatusCodeError')
+          expect(err.statusCode).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+      })
+    })
 
-  tests.forEach( (test) => {
-    describe(test.name, () => {
-
-      describe('when handling error responses', () => {
-        it('should reject promise with HTTP error', async () => {
-          FeatureToggleApiMock.rejectFeatureEnabledCheck()
-          try {
-            await test.method.call(featureToggleService)
-          } catch (err) {
-            expect(err.name).to.equal('StatusCodeError')
-            expect(err.statusCode).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
-          }
+    describe('when handling successful responses', () => {
+      describe('and the feature toggle is enabled', () => {
+        it('should resolve promise returning true', async () => {
+          FeatureToggleApiMock.resolveFeatureEnabledCheck('true')
+          const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name')
+          expect(featureToggleEnabled).to.be.true
         })
       })
 
-      describe('when handling successful responses', () => {
-        describe('and the feature toggle is enabled', () => {
-          it('should resolve promise returning true', async () => {
-            FeatureToggleApiMock.resolveFeatureEnabledCheck('true')
-            const featureToggleEnabled: boolean = await test.method.call(featureToggleService)
-            expect(featureToggleEnabled).to.be.true
-          })
-        })
-
-        describe('and the feature toggle is disabled', () => {
-          it('should resolve promise returning false', async () => {
-            FeatureToggleApiMock.resolveFeatureEnabledCheck('false')
-            const featureToggleEnabled: boolean = await test.method.call(featureToggleService)
-            expect(featureToggleEnabled).to.be.false
-          })
+      describe('and the feature toggle is disabled', () => {
+        it('should resolve promise returning false', async () => {
+          FeatureToggleApiMock.resolveFeatureEnabledCheck('false')
+          const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name')
+          expect(featureToggleEnabled).to.be.false
         })
       })
     })
