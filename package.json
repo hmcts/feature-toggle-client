@@ -29,6 +29,7 @@
     "request-promise-native": "^1.0.3"
   },
   "devDependencies": {
+    "@types/mocha": "*",
     "@types/chai": "^4.0.3",
     "@types/http-status-codes": "^1.0.29",
     "chai": "^4.1.1",
