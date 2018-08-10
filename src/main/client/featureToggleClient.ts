@@ -16,8 +16,8 @@ export class FeatureToggleClient {
     const url: string = `${this.endpointURI}/api/ff4j/check/${featureName}`
 
     return this.request.get(
-      url, 
-      {headers: HeadersBuilder.buildHeaders(user, permissions)}
+      url,
+      { headers: HeadersBuilder.buildHeaders(user, permissions) }
     )
   }
 }

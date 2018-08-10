@@ -15,7 +15,7 @@ export function resolveFeatureEnabledCheck (enabled: string, user?: string, perm
     requestHeaders['x-user-permissions'] = permission
   }
 
-  return mock(serviceBaseURL, 
+  return mock(serviceBaseURL,
     {
       reqheaders: requestHeaders
     })
