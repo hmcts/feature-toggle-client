@@ -1,7 +1,7 @@
 import { CoreOptions, RequestAPI } from 'request'
 import { RequestPromise } from 'request-promise-native'
 
-import { FeatureToggleClient } from './FeatureToggleClient'
+import { FeatureToggleClient } from './featureToggleClient'
 
 export class FeatureToggleClientFactory {
 
