@@ -7,8 +7,6 @@ export class FeatureToggleClient {
 
   constructor (private endpointURI: string,
                private request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>) {
-    this.endpointURI = endpointURI
-    this.request = request
   }
 
   public isFeatureEnabled (featureName: string, user?: string, permissions?: string): RequestPromise<boolean> {

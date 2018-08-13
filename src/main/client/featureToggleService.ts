@@ -5,19 +5,15 @@ import { FeatureToggleClient } from './featureToggleClient'
 import { FeatureToggleClientFactory } from './featureToggleClientFactory'
 
 export class FeatureToggleService {
-  private featureToggleUri: string
-  private request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>
 
-  constructor (featureToggleApiUri: string,
-               request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>) {
-    this.featureToggleUri = featureToggleApiUri
-    this.request = request
+  constructor (private featureToggleApiUri: string,
+               private request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>) {
   }
 
   async isFeatureEnabled (featureName: string, user?: string, permissions?: string): Promise<boolean> {
 
     const client: FeatureToggleClient
-      = await new FeatureToggleClientFactory().create(this.featureToggleUri, this.request)
+      = new FeatureToggleClientFactory().create(this.featureToggleApiUri, this.request)
 
     return client.isFeatureEnabled(featureName, user, permissions)
   }
