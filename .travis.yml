@@ -17,7 +17,7 @@ deploy:
   provider: npm
   email: jenkins-reform@hmcts.net
   api_key:
-    secure: #TO_BE_DEFINED#
+    secure: "EsAAJP4u8y5CPYtg184uFCdozh7ZSyOPvi0PjZUHYpSw2+jnvFjqB7OejgVlHkGBShBQepWfwNTEM+6LrVZs5kOU81Sr18R3BX4nCptnCKTd4jIjs74LCrVcKnTDcY+u47jLo5F8Whq3ZKuu4Y4ZQ9KqGgLKOSrmtmAmrEnI7tGoRsGMg3/Ef5kcyQJjkO+XHd+VVNSCDWkvxwcds+KZvJUbtSqlq/udhwX0ekBS5FPYMWqWL49pjMweCOh2MNwjZEmF8aGV8g1CoUOIAeT9dtUw/Pp3/sHiQOo5jaQnd1Qxayd2Yk0XjgxaI+KQMbybDOK4qJE3sFuxOMO4QGQdq3nCyXWzR0qYhQ7Vsv/OnsYII/ECv5ZrRmxQX+6hw//UaMXG/QSeTMqSCdfReyDM2V6fV+nBYWL9MGApGjQ488lVQ5nS80Wkz73RovPDOzERSkKsTdXPDXUZXgwUh+HG7fr+xaGStUDEJyst1yA/ti+fRvN3FQMCcvx72CLV2eGPU9AcO+QJ558P0D6WRrK7bavbnCoB6QyzyCgDcjWRE4nicLFmtRFU5TMgcQ65VSpPSw9Xd0Vr7Kf0gIewsMnUcGPqCWFoVcGvqJmb6VKvbILbi6rZx5APO5U/iz0TsdvRbPxq15YeD23t49IUxPZ33qZ89Z0qyYMb+dWhaX9WV8U="
   on:
     tags: true
     repo: hmcts/feature-toggle-client
