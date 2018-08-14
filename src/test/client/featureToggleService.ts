@@ -1,5 +1,5 @@
 import { FeatureToggleService } from './../../main/client/featureToggleService'
-import * as FeatureToggleApiMock from './../http-mocks/featureToggleApiMock'
+import * as featureToggleApiMock from './../http-mocks/featureToggleApiMock'
 
 /* tslint:disable:no-unused-expression */
 import * as chai from 'chai'
@@ -20,7 +20,7 @@ const request = requestPromise
 
 describe('FeatureToggleService', () => {
 
-  const featureToggleService: FeatureToggleService = new FeatureToggleService(FeatureToggleApiMock.serviceBaseURL, request)
+  const featureToggleService: FeatureToggleService = new FeatureToggleService(featureToggleApiMock.serviceBaseURL, request)
 
   beforeEach(() => {
     mock.cleanAll()
@@ -30,7 +30,7 @@ describe('FeatureToggleService', () => {
 
     describe('when handling error responses', () => {
       it('should reject promise with HTTP error', async () => {
-        FeatureToggleApiMock.rejectFeatureEnabledCheck()
+        featureToggleApiMock.rejectFeatureEnabledCheck()
         try {
           await featureToggleService.isFeatureEnabled('feature-name', 'user', 'permission')
         } catch (err) {
@@ -43,7 +43,7 @@ describe('FeatureToggleService', () => {
     describe('when handling successful responses', () => {
       describe('and the feature toggle is enabled', () => {
         it('should resolve promise returning true', async () => {
-          FeatureToggleApiMock.resolveFeatureEnabledCheck('true', 'user', 'permission')
+          featureToggleApiMock.resolveFeatureEnabledCheck('true', 'user', 'permission')
           const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name', 'user', 'permission')
           expect(featureToggleEnabled).to.be.true
         })
@@ -51,7 +51,7 @@ describe('FeatureToggleService', () => {
 
       describe('and the feature toggle is disabled', () => {
         it('should resolve promise returning false', async () => {
-          FeatureToggleApiMock.resolveFeatureEnabledCheck('false', 'user', 'permission')
+          featureToggleApiMock.resolveFeatureEnabledCheck('false', 'user', 'permission')
           const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name', 'user', 'permission')
           expect(featureToggleEnabled).to.be.false
         })
@@ -62,7 +62,7 @@ describe('FeatureToggleService', () => {
   describe('without user/permissions', () => {
     describe('when handling error responses', () => {
       it('should reject promise with HTTP error', async () => {
-        FeatureToggleApiMock.rejectFeatureEnabledCheck()
+        featureToggleApiMock.rejectFeatureEnabledCheck()
         try {
           await featureToggleService.isFeatureEnabled('feature-name')
         } catch (err) {
@@ -75,7 +75,7 @@ describe('FeatureToggleService', () => {
     describe('when handling successful responses', () => {
       describe('and the feature toggle is enabled', () => {
         it('should resolve promise returning true', async () => {
-          FeatureToggleApiMock.resolveFeatureEnabledCheck('true')
+          featureToggleApiMock.resolveFeatureEnabledCheck('true')
           const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name')
           expect(featureToggleEnabled).to.be.true
         })
@@ -83,7 +83,7 @@ describe('FeatureToggleService', () => {
 
       describe('and the feature toggle is disabled', () => {
         it('should resolve promise returning false', async () => {
-          FeatureToggleApiMock.resolveFeatureEnabledCheck('false')
+          featureToggleApiMock.resolveFeatureEnabledCheck('false')
           const featureToggleEnabled: boolean = await featureToggleService.isFeatureEnabled('feature-name')
           expect(featureToggleEnabled).to.be.false
         })

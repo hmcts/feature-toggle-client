@@ -10,7 +10,7 @@ export class FeatureToggleService {
                private request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>) {
   }
 
-  async isFeatureEnabled (featureName: string, user?: string, permissions?: string): Promise<boolean> {
+  isFeatureEnabled (featureName: string, user?: string, permissions?: string): Promise<boolean> {
     const client: FeatureToggleClient = new FeatureToggleClientFactory().create(this.featureToggleApiUri, this.request)
     return client.isFeatureEnabled(featureName, user, permissions)
   }
