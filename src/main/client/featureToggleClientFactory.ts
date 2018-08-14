@@ -5,8 +5,8 @@ import { FeatureToggleClient } from './featureToggleClient'
 
 export class FeatureToggleClientFactory {
 
-  async create<T> (featureToggleUri: string,
-                   request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>): Promise<FeatureToggleClient> {
+  create<T> (featureToggleUri: string,
+    request: RequestAPI<RequestPromise, CoreOptions, CoreOptions>): FeatureToggleClient {
     return new FeatureToggleClient(featureToggleUri, request)
   }
 }
